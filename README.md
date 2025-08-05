@@ -11,8 +11,8 @@ This repository presents **Version 1.0** of a complete structural and obstructio
 - ✅ **Machine-verifiable formalization** (Coq/Lean-ready)
 
 > 📄 Files:
-> - `Collapse-Based Proof of the Collatz Conjecture_1.0.tex` — LaTeX source  
-> - `Collapse-Based Proof of the Collatz Conjecture_1.0.pdf` — Full paper with Appendices A–Z
+> - `ak-collatz-collapse_v1.0.tex` — LaTeX source  
+> - `ak-collatz-collapse_v1.0.pdf` — Full paper with Appendices A–Z
 
 ---
 
