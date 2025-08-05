@@ -51,21 +51,42 @@ and the behavior of \( T(n) \) is tracked via categorical collapse transformatio
 We establish a structured resolution chain:
 
 1. **Filtered Sheaf Assignment**  
-   Each \( n \in \mathbb{N} \) is assigned a sheaf \( \mathcal{F}_n \)
+   Each natural number `n` is assigned a filtered sheaf object `F_n`.
 
 2. **Collapse Energy Definition**  
-   Define \( E(n,t) := \sum_{k=0}^{t} \frac{1}{2^k} \cdot \psi(T^k(n)) \)
+   Define the collapse energy as:
+
+   ```
+   E(n, t) = Σ_{k=0}^{t} (1 / 2^k) · ψ(T^k(n))
+   ```
+
+   where `ψ(k)` is a logarithmic weight function and `T^k(n)` is the k-th Collatz iterate.
 
 3. **Collapse Zone Entry**  
-   Show that \( \exists T_0 : E(n,T_0) < \varepsilon \Rightarrow \mathcal{F}_{T_0(n)} \in \mathfrak{C} \)
+   Show that there exists some `T₀` such that:
+
+   ```
+   E(n, T₀) < ε  ⇒  F_{T₀(n)} ∈ 𝔠
+   ```
+
+   where `𝔠` denotes the collapse-admissible subcategory.
 
 4. **Obstruction Vanishing**  
-   Verify:
-   - \( \mathrm{PH}_1(\mathcal{F}) = 0 \)
-   - \( \mathrm{Ext}^1(\mathcal{F}, -) = 0 \)
+   Verify that the following two conditions hold:
+
+   ```
+   PH₁(F_n) = 0       (topological triviality)
+   Ext¹(F_n, -) = 0    (categorical triviality)
+   ```
 
 5. **Collapse Convergence**  
-   Functorially deduce \( \mathcal{F}_n \rightarrow \mathcal{F}_1 \), i.e., \( T^k(n) = 1 \)
+   Functorially deduce that the collapse chain stabilizes:
+
+   ```
+   F_n → F_{T(n)} → ... → F_1
+   ```
+
+   which implies the numerical orbit satisfies `T^k(n) = 1` for some finite `k`.
 
 ---
 
@@ -81,12 +102,12 @@ We establish a structured resolution chain:
 
 ## ✅ Result: The Collatz Conjecture is Proven (Q.E.D.)
 
-> For every \( n \in \mathbb{N} \), the corresponding filtered sheaf \( \mathcal{F}_n \) is collapse-admissible.  
-> Therefore, the Collatz orbit terminates in finite time:
->
-> \[
-> \exists k \in \mathbb{N},\quad T^k(n) = 1
-> \]
+For every natural number `n`, the corresponding filtered sheaf `F_n` is collapse-admissible.  
+Therefore, the Collatz orbit terminates in finite time:
+
+```
+∃ k ∈ ℕ, such that T^k(n) = 1
+```
 
 This resolves the Collatz Conjecture **not empirically**, but **structurally and necessarily** —  
 via categorical compression, energy decay, and obstruction-free convergence.
