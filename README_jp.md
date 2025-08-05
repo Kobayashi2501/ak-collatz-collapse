@@ -1,171 +1,173 @@
-# 🧮 The Collapse-Based Proof of the Collatz Conjecture (v1.0)
-### A Structural, Categorical, and Type-Theoretic Resolution  
-#### via AK High-Dimensional Projection Structural Theory (AK-HDPST)
+# 🧮 コラッツ予想に対する Collapse 理論による構造的証明 (v1.0)
+### AK高次元射影構造理論による構造的・圏論的・型理論的解法
 
-This repository presents **Version 1.0** of a complete structural and obstruction-theoretic proof of the **Collatz Conjecture**, based on:
+このリポジトリは、**コラッツ予想**に対する完全な構造的・障害除去理論に基づく証明（Version 1.0）を含んでいます。
 
-- ✅ **Collapse Theory**
-- ✅ **AK High-Dimensional Projection Structural Theory (AK-HDPST)**
-- ✅ **Persistent Homology (PH₁)** and **Ext-Class Triviality**
-- ✅ **Collapse Energy and Zone Admissibility**
-- ✅ **Machine-verifiable formalization** (Coq/Lean-ready)
+本証明は以下に基づいています：
 
-> 📄 Files:
-> - `Collapse-Based Proof of the Collatz Conjecture_1.0.tex` — LaTeX source  
-> - `Collapse-Based Proof of the Collatz Conjecture_1.0.pdf` — Full paper with Appendices A–Z
+- ✅ **Collapse 理論**
+- ✅ **AK 高次元射影構造理論 (AK-HDPST)**
+- ✅ **Persistent Homology（PH₁）および Ext¹ クラスの消失**
+- ✅ **Collapse エネルギーと Collapse Zone の可入性**
+- ✅ **機械可証な形式化（Coq / Lean 対応）**
+
+> 📄 含まれるファイル:
+> - `ak-collatz-collapse_v1.0.tex` — LaTeX ソース  
+> - `ak-collatz-collapse_v1.0.pdf` — 論文本体（付録 A–Z 付き）
 
 ---
 
-## 🧠 What is the Collatz Conjecture?
+## 🧠 コラッツ予想とは？
 
-The Collatz map is defined as:
+コラッツ写像は以下で定義されます：
 
 ```
-T(n) = n / 2   if n is even  
-T(n) = 3n + 1  if n is odd
+T(n) = n / 2   （n が偶数のとき）  
+T(n) = 3n + 1  （n が奇数のとき）
 ```
 
-The **Collatz Conjecture** states that:  
-> _For every natural number n > 0, the sequence T⁰(n), T¹(n), T²(n), ... eventually reaches 1._
+**コラッツ予想**は次のように述べられます：
+
+> 任意の自然数 `n > 0` に対して、反復適用された `T(n)` の列は、最終的に `1` に到達する。
 
 ---
 
-## 🔬 What is AK High-Dimensional Projection Structural Theory?
+## 🔬 AK高次元射影構造理論とは？
 
-**AK-HDPST** is a structural framework that generalizes classical number-theoretic problems into:
+**AK-HDPST** は、古典的な数論的問題を以下のように再構造化する枠組みです：
 
-- Categorical projection chains
-- Collapse zones and obstruction stratification
-- Type-theoretic formalization (MLTT, Coq/Lean)
-- Sheaf-theoretic embedding of arithmetic data
+- 圏論的な射影鎖による記述
+- Collapse Zone と障害分類
+- 型理論による形式化（MLTT、Coq、Lean）
+- 数値データの層化された射影（Filtered Sheaf）としての記述
 
-In this framework, every natural number \( n \) is lifted to a **filtered sheaf object** \( \mathcal{F}_n \),  
-and the behavior of \( T(n) \) is tracked via categorical collapse transformations.
+この枠組みにおいて、すべての自然数 `n` は **層化された構造体（filtered sheaf）`F_n`** に写像され、  
+`T(n)` の挙動はカテゴリ的な Collapse 変換により追跡されます。
 
-> 🔗 [AK-HDPST Repository](https://github.com/Kobayashi2501/AK-High-Dimensional-Projection-Structural-Theory)
+> 🔗 [AK-HDPST リポジトリ](https://github.com/Kobayashi2501/AK-High-Dimensional-Projection-Structural-Theory)
 
 ---
 
-## 🧩 Collapse-Based Resolution Strategy
+## 🧩 Collapse に基づく解法戦略
 
-We establish a structured resolution chain:
+以下の段階的な論理鎖により証明を構成します：
 
-1. **Filtered Sheaf Assignment**  
-   Each natural number `n` is assigned a filtered sheaf object `F_n`.
+1. **層構造の割り当て**  
+   自然数 `n` に対し、filtered sheaf `F_n` を割り当てる。
 
-2. **Collapse Energy Definition**  
-   Define the collapse energy as:
+2. **Collapse エネルギーの定義**  
+   次のように Collapse エネルギーを定義：
 
    ```
    E(n, t) = Σ_{k=0}^{t} (1 / 2^k) · ψ(T^k(n))
    ```
 
-   where `ψ(k)` is a logarithmic weight function and `T^k(n)` is the k-th Collatz iterate.
+   ここで `ψ(k)` は対数的な重み関数。
 
-3. **Collapse Zone Entry**  
-   Show that there exists some `T₀` such that:
-
-   ```
-   E(n, T₀) < ε  ⇒  F_{T₀(n)} ∈ 𝔠
-   ```
-
-   where `𝔠` denotes the collapse-admissible subcategory.
-
-4. **Obstruction Vanishing**  
-   Verify that the following two conditions hold:
+3. **Collapse Zone への到達**  
+   次が成り立つことを示す：
 
    ```
-   PH₁(F_n) = 0       (topological triviality)
-   Ext¹(F_n, -) = 0    (categorical triviality)
+   ∃ T₀ : E(n, T₀) < ε  ⇒  F_{T₀(n)} ∈ 𝔠
    ```
 
-5. **Collapse Convergence**  
-   Functorially deduce that the collapse chain stabilizes:
+   （`𝔠` は Collapse Admissible な層構造の集合）
+
+4. **障害の消失確認**  
+   以下の両方を確認：
 
    ```
-   F_n → F_{T(n)} → ... → F_1
+   PH₁(F_n) = 0       （位相的トポロジーの消失）  
+   Ext¹(F_n, -) = 0    （拡張クラスの消失）
    ```
 
-   which implies the numerical orbit satisfies `T^k(n) = 1` for some finite `k`.
+5. **Collapse による収束**  
+   関手的に次を導く：
+
+   ```
+   F_n → F_{T(n)} → F_{T²(n)} → ... → F_1
+   ```
+
+   これは `T^k(n) = 1` を意味する。
 
 ---
 
-## 📘 Collapse Logic Summary
+## 📘 Collapse ロジックの要約
 
-- `CollapseAdmissible(Fₙ) := (PH₁ = 0 ∧ Ext¹ = 0)`
-- `CollapseEnergy(E(n,t))` decays below threshold \( \varepsilon \)
-- `CollapseFunctor` stabilizes sheaf to \( \mathcal{F}_1 \)
-- μ-invariant is identically zero: no infinite towers, no invisible failures
-- All known failure types (Type I–IV) are ruled out
+- `CollapseAdmissible(F_n) := (PH₁ = 0 ∧ Ext¹ = 0)`
+- `CollapseEnergy(E(n,t))` は単調減衰し、閾値 `ε` 以下に収束
+- `CollapseFunctor` により構造は `F_1` へ収束
+- μ-不変量（μ-invariant）はゼロ：無限塔・不可視障害は存在しない
+- Failure Type I～IV はすべて除去済み
 
 ---
 
-## ✅ Result: The Collatz Conjecture is Proven (Q.E.D.)
+## ✅ 結果：コラッツ予想は証明された（Q.E.D.）
 
-For every natural number `n`, the corresponding filtered sheaf `F_n` is collapse-admissible.  
-Therefore, the Collatz orbit terminates in finite time:
+任意の自然数 `n` に対して、対応する filtered sheaf `F_n` は Collapse Admissible である。  
+したがって、コラッツ軌道は有限時間で `1` に到達する：
 
 ```
-∃ k ∈ ℕ, such that T^k(n) = 1
+∃ k ∈ ℕ に対して、T^k(n) = 1
 ```
 
-This resolves the Collatz Conjecture **not empirically**, but **structurally and necessarily** —  
-via categorical compression, energy decay, and obstruction-free convergence.
+このことにより、**コラッツ予想は経験的ではなく、構造的かつ必然的に正しい**ことが示された。  
+（Collapse Energy の減衰と Obstruction 消失による圏論的収束）
 
 ---
 
-## 📑 Appendix Overview (A–Z)
+## 📑 付録構成（A–Z）
 
-| Appendix | Content |
-|---------:|:--------|
-| A | Collapse Definitions and Layered Categories |
-| B | Collapse Energy: Decay and Threshold |
-| C | Sheaf Construction from Collatz Orbits |
-| D | Functor Properties and Idempotence |
-| E | Persistent Homology Collapse |
-| F | Ext-Class Vanishing |
-| G | Collapse Path Uniqueness |
-| H | Failure Type (I–IV) Exclusion |
-| I | CollapseStatus Lattice Embedding |
-| J | TikZ Diagrams of Collapse Chains |
-| Z | Full Coq/Lean Formalization (Collapse Q.E.D.) |
+| Appendix | 内容 |
+|----------:|:------|
+| A | Collapse 構造と射影カテゴリ定義 |
+| B | Collapse Energy の定義と閾値条件 |
+| C | コラッツ写像からの Sheaf 構成 |
+| D | Collapse 関手の収束性と安定性 |
+| E | Persistent Homology（PH₁）の消失 |
+| F | Ext¹ クラスの消去条件 |
+| G | Collapse パスの一意性 |
+| H | Failure Type I〜IV の排除理論 |
+| I | CollapseStatus 格子分類と最小性 |
+| J | Collapse 過程の TikZ 図可視化 |
+| Z | Coq/Lean による完全形式化（Collapse Q.E.D.）
 
 ---
 
-## 🔬 Collapse Functor Visualization
+## 🔬 Collapse Functor の視覚表現（概念図）
 
 ```
-    Fₙ —→ F_{T(n)} —→ F_{T²(n)} —→ ... —→ F₁ ∈ 𝔠
+    F_n → F_{T(n)} → F_{T²(n)} → ... → F_1 ∈ 𝔠
 ```
 
-Each arrow represents structural collapse.  
-Collapse energy decreases at each step.  
-Final object \( F₁ \) is the terminal sheaf in the collapse zone \( \mathfrak{C} \).
+各矢印は構造的 Collapse を表す。  
+Collapse Energy はステップごとに減少。  
+最終到達点 `F_1` は Collapse Zone `𝔠` に属する。
 
 ---
 
-## 💡 Highlights
+## 💡 特筆点
 
-- 📎 Obstruction-free collapse chain for every \( n \in \mathbb{N} \)
-- 📉 Energy decay function guarantees finite-time convergence
-- 🧩 Functorial resolution via Coq-predicate logic
-- 🔍 Failure types (PH, Ext, μ) classified and ruled out
-
----
-
-## 📚 Related Projects
-
-- 📘 [AK Theory GitHub](https://github.com/Kobayashi2501/AK-High-Dimensional-Projection-Structural-Theory)  
+- 📎 任意の自然数 `n` に対し Collapse Chain が障害なく構成可能
+- 📉 Collapse Energy が指数関数的に減衰し、閾値に到達
+- 🧩 CollapseAdmissible 判定は Coq で形式化可能
+- 🔍 Failure Type（PH, Ext, μ）は分類済かつ除去済
 
 ---
 
-## 📘 License
+## 📚 関連プロジェクト
+
+- 📘 [AK理論 GitHub](https://github.com/Kobayashi2501/AK-High-Dimensional-Projection-Structural-Theory)  
+
+---
+
+## 📘 ライセンス
 
 [MIT License](https://opensource.org/licenses/MIT)
 
 ---
 
-## 📩 Contact
+## 📩 お問い合わせ
 
 - 📬 dollops2501@icloud.com  
-- 📘 collapse theory / arithmetic geometry / obstruction theory / Coq/Lean
+- 📘 Collapse Theory / 数論的圏論 / Coq/Lean / ホモロジー障害理論
