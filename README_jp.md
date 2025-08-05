@@ -159,6 +159,8 @@ Collapse Energy はステップごとに減少。
 
 - 📘 [AK理論 GitHub](https://github.com/Kobayashi2501/AK-High-Dimensional-Projection-Structural-Theory)  
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16742129.svg)](https://doi.org/10.5281/zenodo.16742129)
+
 ---
 
 ## 📘 ライセンス
